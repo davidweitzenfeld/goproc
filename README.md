@@ -28,8 +28,29 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
+* [`goproc concat [GROUPPREFIX] [GROUPSUFFIX]`](#goproc-concat-groupprefix-groupsuffix)
 * [`goproc hello [FILE]`](#goproc-hello-file)
 * [`goproc help [COMMAND]`](#goproc-help-command)
+
+## `goproc concat [GROUPPREFIX] [GROUPSUFFIX]`
+
+concat a GoPro video group
+
+```
+USAGE
+  $ goproc concat [GROUPPREFIX] [GROUPSUFFIX]
+
+OPTIONS
+  -d, --inputDir=inputDir  directory to search
+  -h, --help               show CLI help
+  -o, --output=output      concatenated output file
+  --dryRun                 run without making any changes
+
+EXAMPLE
+  $ goproc concat GX 0043
+```
+
+_See code: [src\commands\concat.ts](https://github.com/davidweitzenfeld/goproc/blob/v0.1.0/src\commands\concat.ts)_
 
 ## `goproc hello [FILE]`
 
