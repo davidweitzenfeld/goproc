@@ -2,6 +2,7 @@ import {Command, flags} from '@oclif/command'
 import * as path from 'path'
 import {findGroupFiles} from '../functions/find-group-files'
 import {concat} from '../functions/concat'
+import {cli} from 'cli-ux'
 
 export default class Concat extends Command {
   static description = 'concat a GoPro video group'
@@ -32,8 +33,13 @@ export default class Concat extends Command {
 
     const files = await findGroupFiles(inputDir, args.groupPrefix, args.groupSuffix)
     if (files.length > 0) {
-      this.log(`Found files: ${files.map(file => `'${file}'`).join(' ')}. Concatenating...`)
-      const concatFile = dryRun ? output : await concat(files.map(file => path.join(inputDir, file)), output)
+      this.log(`Found ${files.length} files: ${files.map(file => `'${file}'`).join(' ')}. Concatenating...`)
+      const progbar = cli.progress({format: 'Concatenating... [{bar}] {value}%'})
+      progbar.start(100, 0)
+      const concatFile = dryRun ? output : await concat(files.map(file => path.join(inputDir, file)),
+        output, percent => progbar.update(percent))
+      progbar.update(100)
+      progbar.stop()
       this.log(`Done. Created '${concatFile}'.`)
     } else {
       this.log('Found no files.')
