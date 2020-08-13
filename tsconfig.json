@@ -8,8 +8,7 @@
     "strict": true,
     "target": "es2017",
     "lib": [
-      "es2017.full",
-      "es2018.asynciterable"
+      "es2018"
     ]
   },
   "include": [

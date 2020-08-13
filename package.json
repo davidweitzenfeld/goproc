@@ -12,6 +12,8 @@
     "@oclif/config": "^1",
     "@oclif/plugin-help": "^3",
     "cli-ux": "^5.4.10",
+    "gopro-telemetry": "^1.1.14",
+    "gpmf-extract": "^0.1.17",
     "tslib": "^1"
   },
   "devDependencies": {
