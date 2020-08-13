@@ -1,7 +1,7 @@
 {
   "name": "goproc",
   "description": "GoPro video file processing CLI",
-  "version": "0.1.0",
+  "version": "0.0.0-development",
   "author": "David Weitzenfeld",
   "bin": {
     "goproc": "./bin/run"
@@ -32,7 +32,8 @@
     "nyc": "^14",
     "rimraf": "^3.0.2",
     "ts-node": "^8",
-    "typescript": "^3.3"
+    "typescript": "^3.3",
+    "semantic-release": "^17.1.1"
   },
   "engines": {
     "node": ">=14.0.0"
@@ -62,12 +63,16 @@
     "posttest": "eslint . --ext .ts --config .eslintrc",
     "prepack": "rimraf lib && tsc -b && oclif-dev manifest && oclif-dev readme",
     "test": "nyc --extension .ts mocha --forbid-only \"test/**/*.test.ts\"",
-    "version": "oclif-dev readme && git add README.md"
+    "version": "oclif-dev readme && git add README.md",
+    "semantic-release": "semantic-release"
   },
   "types": "lib/index.d.ts",
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/@davidweitzenfeld"
   }
 }
