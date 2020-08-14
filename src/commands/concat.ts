@@ -31,7 +31,7 @@ export default class Concat extends Command {
     const output = flags.output ?? `${args.groupPrefix}00${args.groupSuffix}.MP4`
     const dryRun = flags.dryRun ?? false
 
-    const files = await findGroupFiles(inputDir, args.groupPrefix, args.groupSuffix)
+    const files = await findGroupFiles(inputDir, false, args.groupPrefix, args.groupSuffix)
     if (files.length > 0) {
       this.log(`Found ${files.length} files: ${files.map(file => `'${file}'`).join(' ')}. Concatenating...`)
       const progbar = cli.progress({format: 'Concatenating... [{bar}] {value}%'})

@@ -17,7 +17,7 @@ export default class ConcatAll extends Command {
     inputDir: flags.string({char: 'd', description: 'directory to search'}),
     outputDir: flags.string({char: 'o', description: 'output directory for concatenated files'}),
     outputNameFormat: flags.string({char: 'f', description: 'concatenated files name format'}),
-    recursive: flags.boolean({char: 'r', description: 'search inputDir recursively'}),
+    recursive: flags.boolean({char: 'r', description: 'search inputDir recursively', default: true, allowNo: true}),
     dryRun: flags.boolean({description: 'run without making any changes'}),
     help: flags.help({char: 'h'}),
   }
@@ -31,16 +31,17 @@ export default class ConcatAll extends Command {
     const inputDir = flags.inputDir ?? currentDir
     const outputDir = flags.outputDir ?? currentDir
     const outputNameFormat = flags.outputNameFormat ?? '${prefix}00${suffix}'
+    const recursive = flags.recursive
     const dryRun = flags.dryRun ?? false
 
-    const groups = await Promise.all((await findFileGroups(inputDir))
-      .map(group => findGroupFiles(inputDir, group[0], group[1]).then(files => ([group, files]))))
+    const groups = await Promise.all((await findFileGroups(inputDir, recursive))
+      .map(group => findGroupFiles(inputDir, recursive, group[0], group[1]).then(files => ([group, files]))))
     if (groups.length > 0) {
       this.log(`Found ${groups.length} file groups: ${groups.map(group => `'${group[0][0]}*${group[0][1]}'`).join(' ')}.`)
       for (const group of groups) {
         const outputFileName = formatString(outputNameFormat, {
           prefix: group[0][0],
-          suffix: group[0][1]
+          suffix: group[0][1],
         }) + '.MP4'
         const output = path.join(outputDir, outputFileName)
         this.log(`Processing group '${group[0][0]}*${group[0][1]}', ${group[1].length} file(s): ${group[1].map(file => `'${file}'`).join(' ')}.`)

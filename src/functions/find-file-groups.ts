@@ -1,9 +1,13 @@
 import * as fs from 'fs'
+import * as path from 'path'
 import {notNull} from '../utils/filter-not-null'
+import * as recursiveReadDir from 'recursive-readdir'
 
-export async function findFileGroups(dir: string): Promise<[string, string][]> {
+export async function findFileGroups(dir: string, recursive: boolean): Promise<[string, string][]> {
   const regex = /^(GX|GH)\d{2}(\d{4})\.\w+$/
-  const groups = (await fs.promises.readdir(dir))
+  const readdir = async (dir: string) => recursive ? recursiveReadDir(dir) : fs.promises.readdir(dir)
+  const groups = (await readdir(dir))
+    .map(file => path.basename(file))
     .map(file => file.match(regex))
     .filter(notNull)
     .map(match => ([match[1], match[2]]))

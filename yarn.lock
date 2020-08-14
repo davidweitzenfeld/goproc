@@ -524,6 +524,13 @@
   resolved "https://registry.yarnpkg.com/@types/parse-json/-/parse-json-4.0.0.tgz#2f8bb441434d163b35fb8ffdccd7138927ffb8c0"
   integrity sha512-//oorEZjL6sbPcKUaCdIGlIUeH26mgzimjBB77G6XRgnDl/L5wOnpyBGRe/Mmf5CVW3PwEBE1NjiMZ/ssFh4wA==
 
+"@types/recursive-readdir@^2.2.0":
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/@types/recursive-readdir/-/recursive-readdir-2.2.0.tgz#b39cd5474fd58ea727fe434d5c68b7a20ba9121c"
+  integrity sha512-HGk753KRu2N4mWduovY4BLjYq4jTOL29gV2OfGdGxHcPSWGFkC5RRIdk+VTs5XmYd7MVAD+JwKrcb5+5Y7FOCg==
+  dependencies:
+    "@types/node" "*"
+
 "@types/retry@^0.12.0":
   version "0.12.0"
   resolved "https://registry.yarnpkg.com/@types/retry/-/retry-0.12.0.tgz#2b35eccfcee7d38cd72ad99232fbd58bffb3c84d"
@@ -5659,6 +5666,13 @@ readdir-scoped-modules@^1.0.0, readdir-scoped-modules@^1.1.0:
     dezalgo "^1.0.0"
     graceful-fs "^4.1.2"
     once "^1.3.0"
+
+recursive-readdir@^2.2.2:
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/recursive-readdir/-/recursive-readdir-2.2.2.tgz#9946fb3274e1628de6e36b2f6714953b4845094f"
+  integrity sha512-nRCcW9Sj7NuZwa2XvH9co8NPeXUBhZP7CRKJtU+cS6PW9FpCIFoI5ib0NT1ZrbNuPoRy0ylyCaUL8Gih4LSyFg==
+  dependencies:
+    minimatch "3.0.4"
 
 redent@^3.0.0:
   version "3.0.0"

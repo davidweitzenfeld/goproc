@@ -66,7 +66,7 @@ OPTIONS
   -f, --outputNameFormat=outputNameFormat  concatenated files name format
   -h, --help                               show CLI help
   -o, --outputDir=outputDir                output directory for concatenated files
-  -r, --recursive                          search inputDir recursively
+  -r, --[no-]recursive                     search inputDir recursively
   --dryRun                                 run without making any changes
 
 EXAMPLE
