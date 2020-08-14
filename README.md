@@ -45,6 +45,7 @@ OPTIONS
   -d, --inputDir=inputDir  directory to search
   -h, --help               show CLI help
   -o, --output=output      concatenated output file
+  -r, --[no-]recursive     search inputDir recursively
   --dryRun                 run without making any changes
 
 EXAMPLE

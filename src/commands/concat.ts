@@ -15,6 +15,7 @@ export default class Concat extends Command {
     inputDir: flags.string({char: 'd', description: 'directory to search'}),
     output: flags.string({char: 'o', description: 'concatenated output file'}),
     dryRun: flags.boolean({description: 'run without making any changes'}),
+    recursive: flags.boolean({char: 'r', description: 'search inputDir recursively', default: true, allowNo: true}),
     help: flags.help({char: 'h'}),
   }
 
@@ -29,9 +30,10 @@ export default class Concat extends Command {
     const currentDir = process.cwd()
     const inputDir = flags.inputDir ?? currentDir
     const output = flags.output ?? `${args.groupPrefix}00${args.groupSuffix}.MP4`
+    const recursive = flags.recursive
     const dryRun = flags.dryRun ?? false
 
-    const files = await findGroupFiles(inputDir, false, args.groupPrefix, args.groupSuffix)
+    const files = await findGroupFiles(inputDir, recursive, args.groupPrefix, args.groupSuffix)
     if (files.length > 0) {
       this.log(`Found ${files.length} files: ${files.map(file => `'${file}'`).join(' ')}. Concatenating...`)
       const progbar = cli.progress({format: 'Concatenating... [{bar}] {value}%'})
