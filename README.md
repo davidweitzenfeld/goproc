@@ -19,7 +19,7 @@ $ npm install -g goproc
 $ goproc COMMAND
 running command...
 $ goproc (-v|--version|version)
-goproc/0.1.0 win32-x64 node-v14.7.0
+goproc/0.0.0-development win32-x64 node-v14.7.0
 $ goproc --help [COMMAND]
 USAGE
   $ goproc COMMAND
@@ -29,7 +29,7 @@ USAGE
 # Commands
 <!-- commands -->
 * [`goproc concat [GROUPPREFIX] [GROUPSUFFIX]`](#goproc-concat-groupprefix-groupsuffix)
-* [`goproc hello [FILE]`](#goproc-hello-file)
+* [`goproc extract-telemetry [FILE] [OUTPUT]`](#goproc-extract-telemetry-file-output)
 * [`goproc help [COMMAND]`](#goproc-help-command)
 
 ## `goproc concat [GROUPPREFIX] [GROUPSUFFIX]`
@@ -50,27 +50,25 @@ EXAMPLE
   $ goproc concat GX 0043
 ```
 
-_See code: [src\commands\concat.ts](https://github.com/davidweitzenfeld/goproc/blob/v0.1.0/src\commands\concat.ts)_
+_See code: [src\commands\concat.ts](https://github.com/davidweitzenfeld/goproc/blob/v0.0.0-development/src\commands\concat.ts)_
 
-## `goproc hello [FILE]`
+## `goproc extract-telemetry [FILE] [OUTPUT]`
 
-describe the command here
+extract telemetry data from a GoPro video file
 
 ```
 USAGE
-  $ goproc hello [FILE]
+  $ goproc extract-telemetry [FILE] [OUTPUT]
 
 OPTIONS
-  -f, --force
-  -h, --help       show CLI help
-  -n, --name=name  name to print
+  -h, --help  show CLI help
+  --dryRun    run without making any changes
 
 EXAMPLE
-  $ goproc hello
-  hello world from ./src/hello.ts!
+  $ goproc extract-telemetry GX010043.MP4
 ```
 
-_See code: [src\commands\hello.ts](https://github.com/davidweitzenfeld/goproc/blob/v0.1.0/src\commands\hello.ts)_
+_See code: [src\commands\extract-telemetry.ts](https://github.com/davidweitzenfeld/goproc/blob/v0.0.0-development/src\commands\extract-telemetry.ts)_
 
 ## `goproc help [COMMAND]`
 
