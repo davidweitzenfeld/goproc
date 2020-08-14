@@ -29,6 +29,7 @@ USAGE
 # Commands
 <!-- commands -->
 * [`goproc concat [GROUPPREFIX] [GROUPSUFFIX]`](#goproc-concat-groupprefix-groupsuffix)
+* [`goproc concat-all`](#goproc-concat-all)
 * [`goproc extract-telemetry [FILE] [OUTPUT]`](#goproc-extract-telemetry-file-output)
 * [`goproc help [COMMAND]`](#goproc-help-command)
 
@@ -51,6 +52,27 @@ EXAMPLE
 ```
 
 _See code: [src\commands\concat.ts](https://github.com/davidweitzenfeld/goproc/blob/v0.0.0-development/src\commands\concat.ts)_
+
+## `goproc concat-all`
+
+concat all GoPro video groups in a directory
+
+```
+USAGE
+  $ goproc concat-all
+
+OPTIONS
+  -d, --inputDir=inputDir    directory to search
+  -h, --help                 show CLI help
+  -o, --outputDir=outputDir  output directory for concatenated files
+  -r, --recursive            search inputDir recursively
+  --dryRun                   run without making any changes
+
+EXAMPLE
+  $ goproc concat-all
+```
+
+_See code: [src\commands\concat-all.ts](https://github.com/davidweitzenfeld/goproc/blob/v0.0.0-development/src\commands\concat-all.ts)_
 
 ## `goproc extract-telemetry [FILE] [OUTPUT]`
 
