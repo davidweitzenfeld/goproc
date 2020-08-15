@@ -15,7 +15,12 @@ export default class Concat extends Command {
     inputDir: flags.string({char: 'd', description: 'directory to search'}),
     output: flags.string({char: 'o', description: 'concatenated output file'}),
     dryRun: flags.boolean({description: 'run without making any changes'}),
-    recursive: flags.boolean({char: 'r', description: 'search inputDir recursively', default: true, allowNo: true}),
+    recursive: flags.boolean({
+      char: 'r',
+      description: 'search inputDir recursively',
+      default: true,
+      allowNo: true
+    }),
     help: flags.help({char: 'h'}),
   }
 
@@ -38,8 +43,9 @@ export default class Concat extends Command {
       this.log(`Found ${files.length} files: ${files.map(file => `'${file}'`).join(' ')}. Concatenating...`)
       const progbar = cli.progress({format: 'Concatenating... [{bar}] {value}%'})
       progbar.start(100, 0)
-      const concatFile = dryRun ? output : await concat(files.map(file => path.join(inputDir, file)),
-        output, percent => progbar.update(percent))
+      const concatFile = dryRun ? output :
+        await concat(files.map(file => path.isAbsolute(file) ? file : path.join(inputDir, file)),
+          output, percent => progbar.update(percent))
       progbar.update(100)
       progbar.stop()
       this.log(`Done. Created '${concatFile}'.`)
