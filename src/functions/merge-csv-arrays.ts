@@ -1,13 +1,10 @@
 import * as _ from 'lodash'
+import {sortBy} from '../utils/sort-by'
 
 function csvArrayToDict(array: string[][]): { [key: string]: string }[] {
   const headers = array[0].map(header => header.substring(1, header.length - 1))
   const data = array.splice(1)
   return data.map(row => row.reduce((dict, item, i) => ({...dict, [headers[i]]: item}), {}))
-}
-
-function sortBy<T>(extractor: (item: T) => number): (a: T, b: T) => number {
-  return (a, b) => extractor(a) - extractor(b)
 }
 
 export function mergeCsvArrays(
