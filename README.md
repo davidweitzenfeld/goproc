@@ -85,8 +85,9 @@ USAGE
   $ goproc extract-telemetry [FILE] [OUTPUT]
 
 OPTIONS
-  -h, --help  show CLI help
-  --dryRun    run without making any changes
+  -h, --help       show CLI help
+  --[no-]backfill  fill blank data points using previous data point
+  --dryRun         run without making any changes
 
 EXAMPLE
   $ goproc extract-telemetry GX010043.MP4

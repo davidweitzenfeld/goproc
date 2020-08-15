@@ -5,6 +5,8 @@ import {extractTelemetryData} from '../functions/extract-telemetry-data'
 import {processTelemetryData} from '../functions/process-telemetry-data'
 import * as fs from 'fs'
 import {removeVideoTrack} from '../functions/remove-video-track'
+import {mergeCsvArrays} from '../functions/merge-csv-arrays'
+import {writeCsvFile} from '../functions/write-csv-file'
 
 export default class ExtractTelemetry extends Command {
   static description = 'extract telemetry data from a GoPro video file'
@@ -15,6 +17,11 @@ export default class ExtractTelemetry extends Command {
 
   static flags = {
     dryRun: flags.boolean({description: 'run without making any changes'}),
+    backfill: flags.boolean({
+      description: 'fill blank data points using previous data point',
+      default: true,
+      allowNo: true,
+    }),
     help: flags.help({char: 'h'}),
   }
 
@@ -52,13 +59,18 @@ export default class ExtractTelemetry extends Command {
 
     const progbar3 = cli.progress({format: 'Processing... [{bar}] {value}%'})
     progbar3.start(100, 0)
-    const telemetry = await processTelemetryData(data, percent => progbar3.update(percent))
+    const telemetry = await processTelemetryData(data, percent => progbar3.update(Math.round(percent / 2))) as { [key: string]: string }
+    const csvs = Object.values(telemetry).map(set => set.split('\n').map(line => line.split(',')))
+    const csv = mergeCsvArrays(csvs, flags.backfill, percent => progbar3.update(Math.round(50 + (percent / 2))))
     progbar3.update(100)
     progbar3.stop()
     this.log('Done. Writing telemetry data to file...')
 
-    const gpsTelemetry = telemetry[Object.keys(telemetry).find(k => k.includes('GPS'))!!]
-    if (!dryRun) fs.writeFileSync(output, gpsTelemetry)
+    const progbar4 = cli.progress({format: 'Writing... [{bar}] {value}%'})
+    progbar4.start(100, 0)
+    if (!dryRun) writeCsvFile(csv, output, percent => progbar4.update(50 + (percent / 2)))
+    progbar4.update(100)
+    progbar4.stop()
     this.log(`Wrote telemetry data to file '${output}'.`)
   }
 }
