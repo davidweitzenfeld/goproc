@@ -1,4 +1,7 @@
 {
+  "ts-node": {
+    "files": true
+  },
   "compilerOptions": {
     "declaration": true,
     "importHelpers": true,
@@ -12,6 +15,7 @@
     ]
   },
   "include": [
-    "src/**/*"
+    "src/**/*",
+    "test/decs.d.ts"
   ]
 }

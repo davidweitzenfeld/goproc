@@ -16,6 +16,8 @@ function bufferAppender(path: string, chunkSize: number) {
       mp4boxFile.flush()
     })
     stream.on('data', chunk => {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+      // @ts-ignore
       const arrayBuffer = new Uint8Array(chunk).buffer
       // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
       // @ts-ignore
