@@ -1,4 +1,4 @@
-import {execCmd} from './exec-cmd';
+import {execCmd} from './exec-cmd'
 
 // eslint-disable-next-line valid-jsdoc
 /**

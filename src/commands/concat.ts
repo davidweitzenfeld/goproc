@@ -19,7 +19,7 @@ export default class Concat extends Command {
       char: 'r',
       description: 'search inputDir recursively',
       default: true,
-      allowNo: true
+      allowNo: true,
     }),
     help: flags.help({char: 'h'}),
   }
