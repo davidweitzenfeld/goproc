@@ -1,11 +1,9 @@
 name: Release
 on:
   push:
-    branches:
-      - master
 jobs:
   release:
-    name: Release
+    name: Test & release
     runs-on: ubuntu-18.04
     steps:
       - name: Checkout
@@ -16,7 +14,10 @@ jobs:
           node-version: 14
       - name: Install dependencies
         run: yarn install --frozen-lockfile
+      - name: Test
+        run: yarn test
       - name: Release
+        if: github.ref == 'refs/heads/master' && success()
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
